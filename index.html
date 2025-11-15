@@ -3,94 +3,379 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>StepFlo – Show users the way</title>
+  <title>StepFlo – Guidance, not hype. Action, not noise.</title>
   <style>
+    :root {
+      --bg: #f7f4f0;
+      --fg: #111111;
+      --muted: #6d675f;
+      --accent: #2b5f8a;
+      --card: #ffffff;
+      --border: #ded7ce;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       margin: 0;
-      padding: 0;
-      background: #ffffff;
-      color: #111;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
       line-height: 1.6;
     }
+
+    a {
+      color: inherit;
+    }
+
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+
     header {
-      padding: 80px 20px;
-      text-align: center;
-      max-width: 800px;
-      margin: 0 auto;
+      padding: 32px 0 40px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
     }
-    h1 {
-      font-size: 48px;
-      margin-bottom: 10px;
+
+    .logo-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .logo {
+      font-size: 22px;
       font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
-    h2 {
-      font-size: 24px;
-      margin-top: 0;
-      font-weight: 400;
-      opacity: 0.8;
+
+    .tagline-chip {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      white-space: nowrap;
     }
-    .section {
-      padding: 60px 20px;
-      max-width: 800px;
-      margin: 0 auto;
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 32px;
+      align-items: center;
     }
-    .cta-button {
-      display: inline-block;
-      background: #111;
-      color: #fff;
-      padding: 14px 28px;
-      border-radius: 6px;
+
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .hero-title {
+      font-size: 36px;
+      line-height: 1.2;
+      margin: 0 0 8px;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      margin: 0 0 18px;
+      color: var(--muted);
+    }
+
+    .hero-body {
+      font-size: 16px;
+      margin-bottom: 18px;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
       text-decoration: none;
-      font-weight: 600;
-      margin-top: 20px;
+      border-bottom: 1px solid var(--fg);
+      padding-bottom: 2px;
+      margin-top: 4px;
     }
-    footer {
-      text-align: center;
-      padding: 40px 0;
-      opacity: 0.6;
+
+    .hero-cta span.arrow {
       font-size: 14px;
+    }
+
+    /* Visual: Step cards */
+
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+    }
+
+    .steps-stack {
+      width: 100%;
+      max-width: 320px;
+      position: relative;
+      padding-top: 16px;
+    }
+
+    .step-card {
+      background: var(--card);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.04);
+      position: relative;
+    }
+
+    .step-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .step-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .step-desc {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .step-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 8px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .step-pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .steps-caption {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    section {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 32px;
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    h2 {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .story {
+      background: #f0ebe4;
+      border-radius: 12px;
+      padding: 18px 16px;
+      font-size: 14px;
+    }
+
+    .story p {
+      margin: 0 0 8px;
+    }
+
+    .story p:last-child {
+      margin-bottom: 0;
+    }
+
+    ul {
+      padding-left: 18px;
+      margin: 8px 0 0;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    footer {
+      font-size: 13px;
+      color: var(--muted);
+      padding-top: 24px;
+      text-align: left;
     }
   </style>
 </head>
-
 <body>
+  <div class="page">
+    <header>
+      <div class="logo-row">
+        <div class="logo">StepFlo</div>
+        <div class="tagline-chip">Guidance, not hype. Action, not noise.</div>
+      </div>
+      <div class="hero">
+        <div>
+          <h1 class="hero-title">Your product already makes sense.</h1>
+          <p class="hero-subtitle">StepFlo just helps users see it—one clear step at a time.</p>
+          <p class="hero-body">
+            StepFlo turns the product knowledge you already have—PRDs, designs, internal docs—into simple,
+            accurate steps. Then it helps you place those steps in the moments that matter: inside your product,
+            in your help center, and anywhere users need guidance.
+          </p>
+          <a href="#" class="hero-cta">
+            <span>Join the founding waitlist</span>
+            <span class="arrow">↗</span>
+          </a>
+        </div>
+        <div class="hero-visual">
+          <div class="steps-stack" aria-hidden="true">
+            <div class="step-card">
+              <div class="step-label">Source</div>
+              <div class="step-title">“Set up workspace permissions”</div>
+              <div class="step-desc">PRD · Figma flow · release notes</div>
+            </div>
+            <div class="step-card">
+              <div class="step-label">StepFlo</div>
+              <div class="step-title">Turn it into clear steps</div>
+              <div class="step-desc">1. Open Settings → Workspace<br />2. Choose roles<br />3. Assign access</div>
+              <div class="step-pill">
+                <span class="step-pill-dot"></span>
+                <span>Consistent everywhere</span>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-label">In flow</div>
+              <div class="step-title">Show it where it matters</div>
+              <div class="step-desc">Inline help in Settings, help center article, onboarding checklist.</div>
+            </div>
+            <div class="steps-caption">From scattered knowledge to guided steps, delivered in context.</div>
+          </div>
+        </div>
+      </div>
+    </header>
 
-<header>
-  <h1>StepFlo</h1>
-  <h2>Show users the way.</h2>
-  <p>Turn your product knowledge into clear, step-by-step guidance delivered exactly when users need it — in your product, help center, docs, LMS, and beyond.</p>
-  <a href="#" class="cta-button">Join the waitlist</a>
-</header>
+    <main>
+      <section>
+        <h2>Why users get stuck</h2>
+        <p class="muted">
+          Products rarely lose users because they’re impossible. They lose them because the guidance around them
+          is scattered, stale, or arrives too late.
+        </p>
+        <div class="story">
+          <p><strong>A small story:</strong></p>
+          <p>
+            A PM ships a new “workspace permissions” feature. The announcement goes out. A help center article
+            is drafted. A quick Loom is recorded. Support gets a one-pager in Slack.
+          </p>
+          <p>
+            Two weeks later, users still ask the same questions:
+            <em>“Where do I turn this on?”</em> · <em>“Why can’t I see this?”</em> · <em>“Who has access?”</em>
+          </p>
+          <p>
+            Nothing is technically “wrong.” The knowledge exists. It’s just not showing up in the right place,
+            at the right moment, in the right format.
+          </p>
+          <p><strong>StepFlo is built to fix exactly that.</strong></p>
+        </div>
+      </section>
 
-<div class="section">
-  <h2>The problem</h2>
-  <p>Most products rely on scattered docs, outdated help centers, and generic onboarding. Users need clarity, context, and timing — not more content.</p>
-</div>
+      <section>
+        <h2>What StepFlo does</h2>
+        <p>
+          StepFlo reads the product knowledge you already have and restructures it into clear, reusable steps.
+          No new authoring tool. No separate content universe.
+        </p>
+        <ul>
+          <li>Pull from PRDs, specs, and internal docs.</li>
+          <li>Use designs and flows to understand context.</li>
+          <li>Turn it all into accurate, step-by-step guidance.</li>
+        </ul>
+        <p class="muted">
+          One place to define the “right way” to use a feature. Many places it can show up to help.
+        </p>
+      </section>
 
-<div class="section">
-  <h2>The StepFlo solution</h2>
-  <p>StepFlo analyzes your product knowledge — PRDs, Figma files, release notes, docs — and transforms it into guided steps that appear at the right moment, in every channel.</p>
-</div>
+      <section>
+        <h2>Where the steps go</h2>
+        <p>
+          StepFlo is designed for the channels that actually touch your users and your teams:
+        </p>
+        <ul>
+          <li>Inline guidance in your product.</li>
+          <li>Help center and documentation.</li>
+          <li>Onboarding checklists and in-app tours.</li>
+          <li>LMS modules and internal training.</li>
+          <li>Support macros and internal playbooks.</li>
+        </ul>
+        <p class="muted">
+          One source of truth. No more rewriting the same explanation five different ways.
+        </p>
+      </section>
 
-<div class="section">
-  <h2>Benefits</h2>
-  <ul>
-    <li>Faster adoption</li>
-    <li>Lower support volume</li>
-    <li>Consistent product knowledge</li>
-    <li>Better onboarding</li>
-    <li>Smarter feature launches</li>
-  </ul>
-</div>
+      <section>
+        <h2>Why this matters</h2>
+        <ul>
+          <li><strong>Faster adoption.</strong> Users understand new features when they first encounter them.</li>
+          <li><strong>Less repetition.</strong> Support spends less time answering “where do I…?”</li>
+          <li><strong>Clear ownership.</strong> PMs and education teams define the steps once, with confidence.</li>
+          <li><strong>Consistent messaging.</strong> The same explanation shows up across product, docs, and training.</li>
+        </ul>
+      </section>
 
-<footer>
-  © <span id="year"></span> StepFlo.ai
-</footer>
+      <section>
+        <h2>Be part of the first wave</h2>
+        <p>
+          StepFlo is in early build. If you work in product, UX, customer education, or support and you’re tired
+          of explaining the same flows over and over, we’d love to hear from you.
+        </p>
+        <a href="#" class="hero-cta">
+          <span>Join the founding waitlist</span>
+          <span class="arrow">↗</span>
+        </a>
+      </section>
+    </main>
 
-<script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-</script>
+    <footer>
+      © <span id="year"></span> StepFlo.ai — Guidance, not hype. Action, not noise.
+    </footer>
+  </div>
 
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
